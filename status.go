@@ -12,8 +12,8 @@ type StatusGetParams struct {
 
 // StatusGetResp структура, возвращаемая методом StatusGet.
 type StatusGetResp struct {
-	Text string `json:"text"`
-	Audio *Audio  `json:"audio"`
+	Text  string `json:"text"`
+	Audio *Audio `json:"audio"`
 }
 
 // StatusGet получает текст статуса пользователя или сообщества.
