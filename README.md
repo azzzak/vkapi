@@ -88,7 +88,7 @@ vk.WallPost(postParams)
 | photos         |  ✓  |  **46** / 46   |
 | polls          |     |   **0** / 9    |
 | prettyCards    |     |   **0** / 6    |
-| search         |     |   **0** / 1    |
+| search         |  ✓  |   **1** / 1    |
 | stats          |     |   **0** / 3    |
 | status         |  ✓  |   **2** / 2    |
 | storage        |     |   **0** / 3    |
