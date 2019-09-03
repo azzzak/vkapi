@@ -10,61 +10,61 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
-// AlbumUploadResp фото в альбоме.
-type AlbumUploadResp struct {
+// UploadAlbumResp фото в альбоме.
+type UploadAlbumResp struct {
 	Server     int    `json:"server"`
 	PhotosList string `json:"photos_list"`
 	Hash       string `json:"hash"`
 	AID        int    `json:"aid"`
 }
 
-// AlbumUpload загрузка фото в альбом из io.Reader.
-func AlbumUpload(uploadURL, filename string, reader io.Reader) (*AlbumUploadResp, error) {
-	resp, err := uploadPhoto(uploadURL, filename, reader, new(AlbumUploadResp))
+// UploadAlbum загрузка фото в альбом из io.Reader.
+func UploadAlbum(uploadURL, filename string, reader io.Reader) (*UploadAlbumResp, error) {
+	resp, err := upload(uploadURL, filename, reader, new(UploadAlbumResp))
 	if err != nil {
 		return nil, err
 	}
-	return resp.(*AlbumUploadResp), nil
+	return resp.(*UploadAlbumResp), nil
 }
 
-// AlbumUploadFromFile загрузка фото в альбом из файла.
-func AlbumUploadFromFile(uploadURL, path string) (*AlbumUploadResp, error) {
+// UploadAlbumFromFile загрузка фото в альбом из файла.
+func UploadAlbumFromFile(uploadURL, path string) (*UploadAlbumResp, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
-	return AlbumUpload(uploadURL, filepath.Base(path), file)
+	return UploadAlbum(uploadURL, filepath.Base(path), file)
 }
 
-// WallUploadResp фото на стене.
-type WallUploadResp struct {
+// UploadWallResp фото на стене.
+type UploadWallResp struct {
 	Server int    `json:"server"`
 	Photo  string `json:"photo"`
 	Hash   string `json:"hash"`
 }
 
-// WallUpload загрузка фото на стену из io.Reader.
-func WallUpload(uploadURL, filename string, reader io.Reader) (*WallUploadResp, error) {
-	resp, err := uploadPhoto(uploadURL, filename, reader, new(WallUploadResp))
+// UploadWall загрузка фото на стену из io.Reader.
+func UploadWall(uploadURL, filename string, reader io.Reader) (*UploadWallResp, error) {
+	resp, err := upload(uploadURL, filename, reader, new(UploadWallResp))
 	if err != nil {
 		return nil, err
 	}
-	return resp.(*WallUploadResp), nil
+	return resp.(*UploadWallResp), nil
 }
 
-// WallUploadFromFile загрузка фото на стену из файла.
-func WallUploadFromFile(uploadURL, path string) (*WallUploadResp, error) {
+// UploadWallFromFile загрузка фото на стену из файла.
+func UploadWallFromFile(uploadURL, path string) (*UploadWallResp, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
-	return WallUpload(uploadURL, filepath.Base(path), file)
+	return UploadWall(uploadURL, filepath.Base(path), file)
 }
 
-// AvatarUploadResp главное фото пользователя или сообщества.
-type AvatarUploadResp struct {
+// UploadAvatarResp главное фото пользователя или сообщества.
+type UploadAvatarResp struct {
 	Server      int    `json:"server"`
 	Photo       string `json:"photo"`
 	Mid         int    `json:"mid"`
@@ -73,77 +73,77 @@ type AvatarUploadResp struct {
 	ProfileAID  int    `json:"profile_aid"`
 }
 
-// AvatarUpload загрузка главного фото пользователя или сообщества из io.Reader.
-func AvatarUpload(uploadURL, filename string, reader io.Reader) (*AvatarUploadResp, error) {
-	resp, err := uploadPhoto(uploadURL, filename, reader, new(AvatarUploadResp))
+// UploadAvatar загрузка главного фото пользователя или сообщества из io.Reader.
+func UploadAvatar(uploadURL, filename string, reader io.Reader) (*UploadAvatarResp, error) {
+	resp, err := upload(uploadURL, filename, reader, new(UploadAvatarResp))
 	if err != nil {
 		return nil, err
 	}
-	return resp.(*AvatarUploadResp), nil
+	return resp.(*UploadAvatarResp), nil
 }
 
-// AvatarUploadFromFile загрузка главного фото пользователя или сообщества из файла.
-func AvatarUploadFromFile(uploadURL, path string) (*AvatarUploadResp, error) {
+// UploadAvatarFromFile загрузка главного фото пользователя или сообщества из файла.
+func UploadAvatarFromFile(uploadURL, path string) (*UploadAvatarResp, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
-	return AvatarUpload(uploadURL, filepath.Base(path), file)
+	return UploadAvatar(uploadURL, filepath.Base(path), file)
 }
 
-// MessageUploadResp фото в сообщении.
-type MessageUploadResp struct {
+// UploadMessageResp фото в сообщении.
+type UploadMessageResp struct {
 	Server int    `json:"server"`
 	Photo  string `json:"photo"`
 	Hash   string `json:"hash"`
 }
 
-// MessageUpload загрузка фото в сообщение из io.Reader.
-func MessageUpload(uploadURL, filename string, reader io.Reader) (*MessageUploadResp, error) {
-	resp, err := uploadPhoto(uploadURL, filename, reader, new(MessageUploadResp))
+// UploadMessage загрузка фото в сообщение из io.Reader.
+func UploadMessage(uploadURL, filename string, reader io.Reader) (*UploadMessageResp, error) {
+	resp, err := upload(uploadURL, filename, reader, new(UploadMessageResp))
 	if err != nil {
 		return nil, err
 	}
-	return resp.(*MessageUploadResp), nil
+	return resp.(*UploadMessageResp), nil
 }
 
-// MessageUploadFromFile загрузка фото в сообщение из файла.
-func MessageUploadFromFile(uploadURL, path string) (*MessageUploadResp, error) {
+// UploadMessageFromFile загрузка фото в сообщение из файла.
+func UploadMessageFromFile(uploadURL, path string) (*UploadMessageResp, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
-	return MessageUpload(uploadURL, filepath.Base(path), file)
+	return UploadMessage(uploadURL, filepath.Base(path), file)
 }
 
-// ChatCoverUploadResp главное фото для чата.
-type ChatCoverUploadResp struct {
+// UploadChatCoverResp главное фото для чата.
+type UploadChatCoverResp struct {
 	Response int `json:"response"`
 }
 
-// ChatUpload загрузка главного фото для чата из io.Reader.
-func ChatUpload(uploadURL, filename string, reader io.Reader) (*ChatCoverUploadResp, error) {
-	resp, err := uploadPhoto(uploadURL, filename, reader, new(ChatCoverUploadResp))
+// UploadChatCover загрузка главного фото для чата из io.Reader.
+func UploadChatCover(uploadURL, filename string, reader io.Reader) (*UploadChatCoverResp, error) {
+	resp, err := upload(uploadURL, filename, reader, new(UploadChatCoverResp))
 	if err != nil {
 		return nil, err
 	}
-	return resp.(*ChatCoverUploadResp), nil
+	return resp.(*UploadChatCoverResp), nil
 }
 
-// ChatUploadFromFile загрузка главного фото для чата из файла.
-func ChatUploadFromFile(uploadURL, path string) (*ChatCoverUploadResp, error) {
+// UploadChatCoverFromFile загрузка главного фото для чата из файла.
+func UploadChatCoverFromFile(uploadURL, path string) (*UploadChatCoverResp, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
-	return ChatUpload(uploadURL, filepath.Base(path), file)
+	return UploadChatCover(uploadURL, filepath.Base(path), file)
 }
 
-// ProductUploadResp фото товара.
-type ProductUploadResp struct {
+// UploadProductResp фото товара.
+type UploadProductResp struct {
 	Server   int    `json:"server"`
 	Photo    string `json:"photo"`
 	Hash     string `json:"hash"`
@@ -151,162 +151,162 @@ type ProductUploadResp struct {
 	CropHash string `json:"crop_hash"`
 }
 
-// ProductUpload загрузка фото товара из io.Reader.
-func ProductUpload(uploadURL, filename string, reader io.Reader) (*ProductUploadResp, error) {
-	resp, err := uploadPhoto(uploadURL, filename, reader, new(ProductUploadResp))
+// UploadProduct загрузка фото товара из io.Reader.
+func UploadProduct(uploadURL, filename string, reader io.Reader) (*UploadProductResp, error) {
+	resp, err := upload(uploadURL, filename, reader, new(UploadProductResp))
 	if err != nil {
 		return nil, err
 	}
-	return resp.(*ProductUploadResp), nil
+	return resp.(*UploadProductResp), nil
 }
 
-// ProductUploadFromFile загрузка фото товара из файла.
-func ProductUploadFromFile(uploadURL, path string) (*ProductUploadResp, error) {
+// UploadProductFromFile загрузка фото товара из файла.
+func UploadProductFromFile(uploadURL, path string) (*UploadProductResp, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
-	return ProductUpload(uploadURL, filepath.Base(path), file)
+	return UploadProduct(uploadURL, filepath.Base(path), file)
 }
 
-// ProductSetUploadResp фотоподборка товаров.
-type ProductSetUploadResp struct {
+// UploadProductSetResp фотоподборка товаров.
+type UploadProductSetResp struct {
 	Server int    `json:"server"`
 	Photo  string `json:"photo"`
 	GID    int    `json:"gid"`
 	Hash   string `json:"hash"`
 }
 
-// ProductSetUpload загрузка фотоподборки товаров из io.Reader.
-func ProductSetUpload(uploadURL, filename string, reader io.Reader) (*ProductSetUploadResp, error) {
-	resp, err := uploadPhoto(uploadURL, filename, reader, new(ProductSetUploadResp))
+// UploadProductSet загрузка фотоподборки товаров из io.Reader.
+func UploadProductSet(uploadURL, filename string, reader io.Reader) (*UploadProductSetResp, error) {
+	resp, err := upload(uploadURL, filename, reader, new(UploadProductSetResp))
 	if err != nil {
 		return nil, err
 	}
-	return resp.(*ProductSetUploadResp), nil
+	return resp.(*UploadProductSetResp), nil
 }
 
-// ProductSetUploadFromFile загрузка фотоподборки товаров из файла.
-func ProductSetUploadFromFile(uploadURL, path string) (*ProductSetUploadResp, error) {
+// UploadProductSetFromFile загрузка фотоподборки товаров из файла.
+func UploadProductSetFromFile(uploadURL, path string) (*UploadProductSetResp, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
-	return ProductSetUpload(uploadURL, filepath.Base(path), file)
+	return UploadProductSet(uploadURL, filepath.Base(path), file)
 }
 
-// AudioUploadResp аудиозапись.
-type AudioUploadResp struct {
+// UploadAudioResp аудиозапись.
+type UploadAudioResp struct {
 	Redirect string `json:"redirect"`
 	Server   int    `json:"server"`
 	Audio    string `json:"audio"`
 }
 
-// AudioUpload загрузка аудиозаписи из io.Reader.
-func AudioUpload(uploadURL, filename string, reader io.Reader) (*AudioUploadResp, error) {
-	resp, err := uploadPhoto(uploadURL, filename, reader, new(AudioUploadResp))
+// UploadAudio загрузка аудиозаписи из io.Reader.
+func UploadAudio(uploadURL, filename string, reader io.Reader) (*UploadAudioResp, error) {
+	resp, err := upload(uploadURL, filename, reader, new(UploadAudioResp))
 	if err != nil {
 		return nil, err
 	}
-	return resp.(*AudioUploadResp), nil
+	return resp.(*UploadAudioResp), nil
 }
 
-// AudioUploadFromFile загрузка аудиозаписи из файла.
-func AudioUploadFromFile(uploadURL, path string) (*AudioUploadResp, error) {
+// UploadAudioFromFile загрузка аудиозаписи из файла.
+func UploadAudioFromFile(uploadURL, path string) (*UploadAudioResp, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
-	return AudioUpload(uploadURL, filepath.Base(path), file)
+	return UploadAudio(uploadURL, filepath.Base(path), file)
 }
 
-// VideoUploadResp видеозапись.
-type VideoUploadResp struct {
+// UploadVideoResp видеозапись.
+type UploadVideoResp struct {
 	Size    int `json:"size,omitempty"`
 	VideoID int `json:"video_id,omitempty"`
 }
 
-// VideoUpload загрузка видеозаписи из io.Reader.
-func VideoUpload(uploadURL, filename string, reader io.Reader) (*VideoUploadResp, error) {
-	resp, err := uploadPhoto(uploadURL, filename, reader, new(VideoUploadResp))
+// UploadVideo загрузка видеозаписи из io.Reader.
+func UploadVideo(uploadURL, filename string, reader io.Reader) (*UploadVideoResp, error) {
+	resp, err := upload(uploadURL, filename, reader, new(UploadVideoResp))
 	if err != nil {
 		return nil, err
 	}
-	return resp.(*VideoUploadResp), nil
+	return resp.(*UploadVideoResp), nil
 }
 
-// VideoUploadFromFile загрузка видеозаписи из файла.
-func VideoUploadFromFile(uploadURL, path string) (*VideoUploadResp, error) {
+// UploadVideoFromFile загрузка видеозаписи из файла.
+func UploadVideoFromFile(uploadURL, path string) (*UploadVideoResp, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
-	return VideoUpload(uploadURL, filepath.Base(path), file)
+	return UploadVideo(uploadURL, filepath.Base(path), file)
 }
 
-// DocUploadResp документ.
-type DocUploadResp struct {
+// UploadDocResp документ.
+type UploadDocResp struct {
 	File string `json:"file,omitempty"`
 }
 
-// DocUpload загрузка документа из io.Reader.
-func DocUpload(uploadURL, filename string, reader io.Reader) (*DocUploadResp, error) {
-	resp, err := uploadPhoto(uploadURL, filename, reader, new(DocUploadResp))
+// UploadDoc загрузка документа из io.Reader.
+func UploadDoc(uploadURL, filename string, reader io.Reader) (*UploadDocResp, error) {
+	resp, err := upload(uploadURL, filename, reader, new(UploadDocResp))
 	if err != nil {
 		return nil, err
 	}
-	return resp.(*DocUploadResp), nil
+	return resp.(*UploadDocResp), nil
 }
 
-// DocUploadFromFile загрузка документа из файла.
-func DocUploadFromFile(uploadURL, path string) (*DocUploadResp, error) {
+// UploadDocFromFile загрузка документа из файла.
+func UploadDocFromFile(uploadURL, path string) (*UploadDocResp, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
-	return DocUpload(uploadURL, filepath.Base(path), file)
+	return UploadDoc(uploadURL, filepath.Base(path), file)
 }
 
-// GroupCoverUploadResp обложка сообщества.
-type GroupCoverUploadResp struct {
+// UploadGroupCoverResp обложка сообщества.
+type UploadGroupCoverResp struct {
 	Photo string `json:"photo"`
 	Hash  string `json:"hash"`
 }
 
-// GroupCoverUpload загрузка обложки сообщества из io.Reader.
-func GroupCoverUpload(uploadURL, filename string, reader io.Reader) (*GroupCoverUploadResp, error) {
-	resp, err := uploadPhoto(uploadURL, filename, reader, new(GroupCoverUploadResp))
+// UploadGroupCover загрузка обложки сообщества из io.Reader.
+func UploadGroupCover(uploadURL, filename string, reader io.Reader) (*UploadGroupCoverResp, error) {
+	resp, err := upload(uploadURL, filename, reader, new(UploadGroupCoverResp))
 	if err != nil {
 		return nil, err
 	}
-	return resp.(*GroupCoverUploadResp), nil
+	return resp.(*UploadGroupCoverResp), nil
 }
 
-// GroupCoverUploadFromFile загрузка обложки сообщества из файла.
-func GroupCoverUploadFromFile(uploadURL, path string) (*GroupCoverUploadResp, error) {
+// UploadGroupCoverFromFile загрузка обложки сообщества из файла.
+func UploadGroupCoverFromFile(uploadURL, path string) (*UploadGroupCoverResp, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
-	return GroupCoverUpload(uploadURL, filepath.Base(path), file)
+	return UploadGroupCover(uploadURL, filepath.Base(path), file)
 }
 
-func uploadPhoto(uploadURL, filename string, reader io.Reader, holder interface{}) (interface{}, error) {
+func upload(uploadURL, filename string, reader io.Reader, holder interface{}) (interface{}, error) {
 	var fieldName string
 	switch holder.(type) {
-	case *MessageUploadResp, *WallUploadResp, *AvatarUploadResp, *GroupCoverUploadResp:
+	case *UploadMessageResp, *UploadWallResp, *UploadAvatarResp, *UploadGroupCoverResp:
 		fieldName = "photo"
-	case *ChatCoverUploadResp, *AudioUploadResp, *DocUploadResp, *ProductUploadResp, *ProductSetUploadResp:
+	case *UploadChatCoverResp, *UploadAudioResp, *UploadDocResp, *UploadProductResp, *UploadProductSetResp:
 		fieldName = "file"
-	case *VideoUploadResp:
+	case *UploadVideoResp:
 		fieldName = "video_file"
-	case *AlbumUploadResp:
+	case *UploadAlbumResp:
 		fieldName = "file1"
 	}
 

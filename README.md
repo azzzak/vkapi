@@ -44,7 +44,7 @@ getUploadURLParams := vkapi.PhotosGetUploadServerParams{
 upload, _ := vk.PhotosGetUploadServer(getUploadURLParams)
 
 // загружаем фото по полученному адресу
-u, _ := vkapi.AlbumUploadFromFile(upload.UploadURL, "photo.jpg")
+u, _ := vkapi.UploadAlbumFromFile(upload.UploadURL, "photo.jpg")
 
 // сохраняем загруженное фото
 saveParams := vkapi.PhotosSaveParams{
