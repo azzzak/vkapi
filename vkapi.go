@@ -78,8 +78,6 @@ func (api *API) Request(method string, p, holder interface{}) (interface{}, erro
 		return nil, err
 	}
 
-	// fmt.Println(string(resp.Body()))
-
 	if resp.StatusCode() != http.StatusOK {
 		return nil, errors.New(http.StatusText(resp.StatusCode()))
 	}
@@ -162,7 +160,6 @@ func structToMap(i interface{}) map[string]string {
 					log.Println("error:", err)
 				}
 				v = string(b)
-				// fmt.Println(v)
 			}
 		}
 		k := xstrings.ToSnakeCase(t.Field(i).Name)

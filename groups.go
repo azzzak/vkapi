@@ -424,13 +424,13 @@ type GroupsGetParams struct {
 	Count    uint
 }
 
-// GroupsGetIDSResp структура, возвращаемая методом GroupsGet, включает идентификаторы сообществ.
+// GroupsGetIDSResp структура, возвращаемая методом GroupsGet, содержит идентификаторы сообществ.
 type GroupsGetIDSResp struct {
 	Count int   `json:"count"`
 	Items []int `json:"items"`
 }
 
-// GroupsGetGroupsResp структура, возвращаемая методом GroupsGet, включает объекты-сообщества.
+// GroupsGetGroupsResp структура, возвращаемая методом GroupsGet, содержит объекты-сообщества.
 type GroupsGetGroupsResp struct {
 	Count int     `json:"count"`
 	Items []Group `json:"items"`
@@ -899,13 +899,13 @@ type GroupsGetMembersParams struct {
 	Filter  string
 }
 
-// GroupsGetMembersIDSResp структура, возвращаемая методом GroupsGetMembers, включает идентификаторы участников сообщества.
+// GroupsGetMembersIDSResp структура, возвращаемая методом GroupsGetMembers, содержит идентификаторы участников сообщества.
 type GroupsGetMembersIDSResp struct {
 	Count int   `json:"count"`
 	Items []int `json:"items"`
 }
 
-// GroupsGetMembersRolesResp структура, возвращаемая методом GroupsGetMembers, включает роли руководителей сообщества.
+// GroupsGetMembersRolesResp структура, возвращаемая методом GroupsGetMembers, содержит роли руководителей сообщества.
 type GroupsGetMembersRolesResp struct {
 	Count int `json:"count"`
 	Items []struct {
@@ -968,13 +968,13 @@ type GroupsGetRequestsParams struct {
 	Fields  string
 }
 
-// GroupsGetRequestsIDSResp структура, возвращаемая методом GroupsGetRequests, включает идентификаторы пользователей.
+// GroupsGetRequestsIDSResp структура, возвращаемая методом GroupsGetRequests, содержит идентификаторы пользователей.
 type GroupsGetRequestsIDSResp struct {
 	Count int   `json:"count"`
 	Items []int `json:"items"`
 }
 
-// GroupsGetRequestsUsersResp структура, возвращаемая методом GroupsGetRequests, включает включает объекты-профили.
+// GroupsGetRequestsUsersResp структура, возвращаемая методом GroupsGetRequests, содержит объекты-профили.
 type GroupsGetRequestsUsersResp struct {
 	Count int    `json:"count"`
 	Items []User `json:"items"`
