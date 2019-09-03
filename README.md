@@ -74,7 +74,7 @@ vk.WallPost(postParams)
 | database       |  ✓  |  **12** / 12   |
 | docs           |     |   **0** / 11   |
 | fave           |     |   **0** / 23   |
-| friends        |     |   **0** / 18   |
+| friends        |  ✓  |  **18** / 18   |
 | gifts          |     |   **0** / 1    |
 | groups         |  ✓  |  **45** / 45   |
 | leadForms      |     |   **0** / 7    |
