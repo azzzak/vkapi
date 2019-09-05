@@ -20,7 +20,7 @@ type UploadAlbumResp struct {
 
 // UploadAlbum загрузка фото в альбом из io.Reader.
 func UploadAlbum(uploadURL, filename string, reader io.Reader) (*UploadAlbumResp, error) {
-	resp, err := upload(uploadURL, filename, reader, new(UploadAlbumResp))
+	resp, err := upload(uploadURL, "file1", filename, reader, new(UploadAlbumResp))
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ type UploadWallResp struct {
 
 // UploadWall загрузка фото на стену из io.Reader.
 func UploadWall(uploadURL, filename string, reader io.Reader) (*UploadWallResp, error) {
-	resp, err := upload(uploadURL, filename, reader, new(UploadWallResp))
+	resp, err := upload(uploadURL, "photo", filename, reader, new(UploadWallResp))
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +75,7 @@ type UploadAvatarResp struct {
 
 // UploadAvatar загрузка главного фото пользователя или сообщества из io.Reader.
 func UploadAvatar(uploadURL, filename string, reader io.Reader) (*UploadAvatarResp, error) {
-	resp, err := upload(uploadURL, filename, reader, new(UploadAvatarResp))
+	resp, err := upload(uploadURL, "photo", filename, reader, new(UploadAvatarResp))
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +101,7 @@ type UploadMessageResp struct {
 
 // UploadMessage загрузка фото в сообщение из io.Reader.
 func UploadMessage(uploadURL, filename string, reader io.Reader) (*UploadMessageResp, error) {
-	resp, err := upload(uploadURL, filename, reader, new(UploadMessageResp))
+	resp, err := upload(uploadURL, "photo", filename, reader, new(UploadMessageResp))
 	if err != nil {
 		return nil, err
 	}
@@ -125,7 +125,7 @@ type UploadChatCoverResp struct {
 
 // UploadChatCover загрузка главного фото для чата из io.Reader.
 func UploadChatCover(uploadURL, filename string, reader io.Reader) (*UploadChatCoverResp, error) {
-	resp, err := upload(uploadURL, filename, reader, new(UploadChatCoverResp))
+	resp, err := upload(uploadURL, "file", filename, reader, new(UploadChatCoverResp))
 	if err != nil {
 		return nil, err
 	}
@@ -153,7 +153,7 @@ type UploadProductResp struct {
 
 // UploadProduct загрузка фото товара из io.Reader.
 func UploadProduct(uploadURL, filename string, reader io.Reader) (*UploadProductResp, error) {
-	resp, err := upload(uploadURL, filename, reader, new(UploadProductResp))
+	resp, err := upload(uploadURL, "file", filename, reader, new(UploadProductResp))
 	if err != nil {
 		return nil, err
 	}
@@ -180,7 +180,7 @@ type UploadProductSetResp struct {
 
 // UploadProductSet загрузка фотоподборки товаров из io.Reader.
 func UploadProductSet(uploadURL, filename string, reader io.Reader) (*UploadProductSetResp, error) {
-	resp, err := upload(uploadURL, filename, reader, new(UploadProductSetResp))
+	resp, err := upload(uploadURL, "file", filename, reader, new(UploadProductSetResp))
 	if err != nil {
 		return nil, err
 	}
@@ -206,7 +206,7 @@ type UploadAudioResp struct {
 
 // UploadAudio загрузка аудиозаписи из io.Reader.
 func UploadAudio(uploadURL, filename string, reader io.Reader) (*UploadAudioResp, error) {
-	resp, err := upload(uploadURL, filename, reader, new(UploadAudioResp))
+	resp, err := upload(uploadURL, "file", filename, reader, new(UploadAudioResp))
 	if err != nil {
 		return nil, err
 	}
@@ -231,7 +231,7 @@ type UploadVideoResp struct {
 
 // UploadVideo загрузка видеозаписи из io.Reader.
 func UploadVideo(uploadURL, filename string, reader io.Reader) (*UploadVideoResp, error) {
-	resp, err := upload(uploadURL, filename, reader, new(UploadVideoResp))
+	resp, err := upload(uploadURL, "video_file", filename, reader, new(UploadVideoResp))
 	if err != nil {
 		return nil, err
 	}
@@ -255,7 +255,7 @@ type UploadDocResp struct {
 
 // UploadDoc загрузка документа из io.Reader.
 func UploadDoc(uploadURL, filename string, reader io.Reader) (*UploadDocResp, error) {
-	resp, err := upload(uploadURL, filename, reader, new(UploadDocResp))
+	resp, err := upload(uploadURL, "file", filename, reader, new(UploadDocResp))
 	if err != nil {
 		return nil, err
 	}
@@ -280,7 +280,7 @@ type UploadGroupCoverResp struct {
 
 // UploadGroupCover загрузка обложки сообщества из io.Reader.
 func UploadGroupCover(uploadURL, filename string, reader io.Reader) (*UploadGroupCoverResp, error) {
-	resp, err := upload(uploadURL, filename, reader, new(UploadGroupCoverResp))
+	resp, err := upload(uploadURL, "photo", filename, reader, new(UploadGroupCoverResp))
 	if err != nil {
 		return nil, err
 	}
@@ -297,22 +297,10 @@ func UploadGroupCoverFromFile(uploadURL, path string) (*UploadGroupCoverResp, er
 	return UploadGroupCover(uploadURL, filepath.Base(path), file)
 }
 
-func upload(uploadURL, filename string, reader io.Reader, holder interface{}) (interface{}, error) {
-	var fieldName string
-	switch holder.(type) {
-	case *UploadMessageResp, *UploadWallResp, *UploadAvatarResp, *UploadGroupCoverResp:
-		fieldName = "photo"
-	case *UploadChatCoverResp, *UploadAudioResp, *UploadDocResp, *UploadProductResp, *UploadProductSetResp:
-		fieldName = "file"
-	case *UploadVideoResp:
-		fieldName = "video_file"
-	case *UploadAlbumResp:
-		fieldName = "file1"
-	}
-
+func upload(uploadURL, field, filename string, reader io.Reader, holder interface{}) (interface{}, error) {
 	client := resty.New()
 	resp, err := client.R().
-		SetFileReader(fieldName, filename, reader).
+		SetFileReader(field, filename, reader).
 		Post(uploadURL)
 	if err != nil {
 		return nil, err
