@@ -912,7 +912,7 @@ type MessagesSendParams struct {
 	Attachment      string
 	ReplyTo         int
 	ForwardMessages []int
-	Forward         interface{}
+	Forward         string
 	StickerID       uint
 	GroupID         uint
 	Keyboard        *Keyboard
