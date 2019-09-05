@@ -435,7 +435,7 @@ type Message struct {
 		}
 	} `json:"action"`
 
-	ConversatioMmessageID int  `json:"conversatio_mmessage_id"`
+	ConversationMessageID int  `json:"conversation_message_id"`
 	IsHidden              bool `json:"is_hidden"`
 	Out                   int  `json:"out"`
 }
