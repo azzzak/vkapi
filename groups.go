@@ -1008,27 +1008,34 @@ type GroupsGetSettingsParams struct {
 
 // GroupsGetSettingsResp структура, возвращаемая методом GroupsGetSettings.
 type GroupsGetSettingsResp struct {
-	Title              string      `json:"title"`
-	Description        string      `json:"description"`
-	Address            string      `json:"address"`
-	Place              *Place      `json:"place"`
-	Wall               int         `json:"wall"`
-	Photos             int         `json:"photos"`
-	Video              int         `json:"video"`
-	Audio              int         `json:"audio"`
-	Docs               int         `json:"docs"`
-	Topics             int         `json:"topics"`
-	Wiki               int         `json:"wiki"`
-	Messages           int         `json:"messages"`
-	ObsceneFilter      int         `json:"obscene_filter"`
-	ObsceneStopwords   int         `json:"obscene_stopwords"`
-	ObsceneWords       []string    `json:"obscene_words"`
-	PublicCategory     int         `json:"public_category"`
-	PublicSubcategory  int         `json:"public_subcategory"`
-	PublicCategoryList interface{} `json:"public_category_list"`
-	Access             int         `json:"access"`
-	Subject            int         `json:"subject"`
-	SubjectList        []struct {
+	Title              string   `json:"title"`
+	Description        string   `json:"description"`
+	Address            string   `json:"address"`
+	Place              *Place   `json:"place"`
+	Wall               int      `json:"wall"`
+	Photos             int      `json:"photos"`
+	Video              int      `json:"video"`
+	Audio              int      `json:"audio"`
+	Docs               int      `json:"docs"`
+	Topics             int      `json:"topics"`
+	Wiki               int      `json:"wiki"`
+	Messages           int      `json:"messages"`
+	ObsceneFilter      int      `json:"obscene_filter"`
+	ObsceneStopwords   int      `json:"obscene_stopwords"`
+	ObsceneWords       []string `json:"obscene_words"`
+	PublicCategory     int      `json:"public_category"`
+	PublicSubcategory  int      `json:"public_subcategory"`
+	PublicCategoryList []struct {
+		ID           int    `json:"id"`
+		Name         string `json:"name"`
+		SubtypesList []struct {
+			ID   int    `json:"id"`
+			Name string `json:"name"`
+		} `json:"subtypes_list"`
+	} `json:"public_category_list"`
+	Access      int `json:"access"`
+	Subject     int `json:"subject"`
+	SubjectList []struct {
 		ID   int    `json:"id"`
 		Name string `json:"name"`
 	} `json:"subject_list"`
