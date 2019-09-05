@@ -322,10 +322,10 @@ type Group struct {
 
 // Post описывает запись на стене пользователя или сообщества.
 type Post struct {
-	ID           int
-	OwnerID      int
-	FromID       int
-	CreatedBy    int
+	ID           int    `json:"id"`
+	OwnerID      int    `json:"owner_id"`
+	FromID       int    `json:"from_id"`
+	CreatedBy    int    `json:"created_by"`
 	Date         int64  `json:"date"`
 	Text         string `json:"text"`
 	ReplyOwnerID int    `json:"reply_owner_id"`
