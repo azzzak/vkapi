@@ -806,7 +806,7 @@ type Photo struct {
 // Size формат описания размеров фотографии.
 type Size struct {
 	Type   string `json:"type"`
-	Src    string `json:"src"`
+	URL    string `json:"url"`
 	Width  int    `json:"width"`
 	Height int    `json:"height"`
 }
